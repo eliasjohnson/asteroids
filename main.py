@@ -1,6 +1,7 @@
 import pygame as p
 import constants as c
 from logger import log_state
+from player import Player
 
 
 def main():
@@ -23,13 +24,16 @@ def main():
             if event.type == p.QUIT:
                 return
         screen.fill("black")
-        p.display.flip()
         clock.tick(frame_rate)
 
         # delta time, delta being change in value. in gaming, delta time(dt) is
         # "time that has passed since the last frame was drawn".
         dt = clock.tick(frame_rate) / 1000
         
+        #instantiate player
+        player_ship = Player(x=c.SCREEN_WIDTH / 2, y=c.SCREEN_HEIGHT / 2,  radius=c.PLAYER_RADIUS) 
+        player_ship.draw(screen)
+        p.display.flip()
 
 if __name__ == "__main__":
     main()
