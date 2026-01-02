@@ -14,7 +14,9 @@ def main():
     dt = 0
     frame_rate = 60
     screen = p.display.set_mode((c.SCREEN_WIDTH, c.SCREEN_HEIGHT))
-    
+    #actual player
+    player_ship = Player(x=c.SCREEN_WIDTH / 2, y=c.SCREEN_HEIGHT / 2,  radius=c.PLAYER_RADIUS) 
+
     #endless game loop, only exit on close window event (currently)
     while True:
         log_state()
@@ -30,8 +32,11 @@ def main():
         # "time that has passed since the last frame was drawn".
         dt = clock.tick(frame_rate) / 1000
         
-        #instantiate player
-        player_ship = Player(x=c.SCREEN_WIDTH / 2, y=c.SCREEN_HEIGHT / 2,  radius=c.PLAYER_RADIUS) 
+
+        #rotate ship
+        player_ship.update(dt)
+        
+        #render
         player_ship.draw(screen)
         p.display.flip()
 
