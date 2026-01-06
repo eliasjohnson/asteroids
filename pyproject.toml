@@ -1,7 +1,7 @@
 [project]
 name = "asteroids"
 version = "0.1.0"
-description = "Add your description here"
+description = "OOP practice in python with Pygame, by making the classic Asteroids game."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
