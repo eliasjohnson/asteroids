@@ -4,6 +4,8 @@ from logger import log_state
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from logger import log_event
+import sys
 
 
 def main():
@@ -14,9 +16,9 @@ def main():
 
     # Player is the name of the class, not an instance of it
     # This must be done before any Player objects are created
-    Player.containers = (updatable, drawable)
-    Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = (updatable)
+    Player.containers = updatable, drawable
+    Asteroid.containers = asteroids, updatable, drawable
+    AsteroidField.containers = updatable
     
     print(f"Starting Asteroids with pygame version: {p.version.ver}!")
     print(f"Screen width: {c.SCREEN_WIDTH} \nScreen height: {c.SCREEN_HEIGHT}")
@@ -53,6 +55,12 @@ def main():
         # rotate ship
         # updates the group "updatable" of all updatable objects
         updatable.update(dt)
+        
+        for asteroid in asteroids:
+            if asteroid.collides_with(player_ship):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
 
         # render
         for item in drawable:
